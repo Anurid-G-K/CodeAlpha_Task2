@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chess FAQ Chatbot</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+  <h1 style="margin-bottom: 75px;">Chess Chatbot</h1>
+  <div style="display: flex; margin-left: 70px;">
+    <input type="text" id="question" placeholder="Ask me anything about chess..." style="flex-grow: 1; margin-right: 0.5rem;">
+    <button onclick="ask()" style="white-space: nowrap; margin-right: 70px;">Ask</button>
+  </div>
+  <div id="response"></div>
+</div>
+
+  <script>
+    async function ask() {
+      const q = document.getElementById("question").value;
+      const res = await fetch("/get-answer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: q })
+      });
+      const data = await res.json();
+      document.getElementById("response").innerText = data.answer;
+    }
+  </script>
+</body>
+</html>

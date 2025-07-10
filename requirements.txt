@@ -1,0 +1,5 @@
+A basic browser
+flask and flask-cors
+scikit-learn
+numpy
+markdown
